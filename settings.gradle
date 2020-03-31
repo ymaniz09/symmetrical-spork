@@ -1,0 +1,2 @@
+rootProject.name='Symmetrical Spork'
+include ':app'
