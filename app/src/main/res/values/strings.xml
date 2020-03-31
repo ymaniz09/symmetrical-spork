@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Symmetrical Spork</string>
+    <string name="menu_get_user">get user</string>
+    <string name="menu_get_blogs">get blogs</string>
 </resources>
