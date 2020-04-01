@@ -6,8 +6,12 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.github.ymaniz09.symmetricalspork.R
 import com.github.ymaniz09.symmetricalspork.model.User
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
+
+    private val viewModel: MainViewModel by viewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
