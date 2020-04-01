@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.github.ymaniz09.symmetricalspork.MainFragment"
+        android:name="com.github.ymaniz09.symmetricalspork.ui.main.MainFragment"
         android:label="MainFragment" />
 </navigation>

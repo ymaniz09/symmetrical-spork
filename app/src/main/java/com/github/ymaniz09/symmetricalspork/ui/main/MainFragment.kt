@@ -1,8 +1,11 @@
-package com.github.ymaniz09.symmetricalspork
+package com.github.ymaniz09.symmetricalspork.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.github.ymaniz09.symmetricalspork.R
+import com.github.ymaniz09.symmetricalspork.model.User
 
 class MainFragment : Fragment() {
     override fun onCreateView(
@@ -16,6 +19,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        val user = User("ygor.maniz@gmail.com", "ymaniz09", "image.url")
+        Log.d("TAG", "the user is $user")
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
