@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.github.ymaniz09.symmetricalspork.model.BlogPost
+import com.github.ymaniz09.symmetricalspork.model.User
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent.*
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainViewState
@@ -33,5 +35,27 @@ class MainViewModel : ViewModel() {
             is None ->
                 AbsentLiveData.create()
         }
+    }
+
+    fun setBlogListData(blogPosts: List<BlogPost>){
+        val update = getCurrentViewStateOrNew()
+        update.blogPosts = blogPosts
+        _viewState.value = update
+    }
+
+    fun setUser(user: User){
+        val update = getCurrentViewStateOrNew()
+        update.user = user
+        _viewState.value = update
+    }
+
+    fun getCurrentViewStateOrNew(): MainViewState {
+        return viewState.value?.let {
+            it
+        }?: MainViewState()
+    }
+
+    fun setStateEvent(event: MainStateEvent){
+        _stateEvent.value = event
     }
 }
