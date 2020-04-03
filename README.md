@@ -17,19 +17,17 @@ LiveData for each view.
 - Repository pattern
 - NetworkBoundResource (as recommend by architecture guide in google sample. See [here](https://github.com/android/architecture-components-samples/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt) ).
 
-The app does two things:
-
+## Possible events:
+The two possible actions here:
 - Get 'User' data from [open-api.xyz/placeholder/user](https://open-api.xyz/placeholder/user).
 - Get a list of 'BlogPost' data from [open-api.xyz/placeholder/blogs](https://open-api.xyz/placeholder/blogs).
 
-## Possible events:
-The two possible actions here ir get user and get blog posts.
 Those two will be handled by MainStateEvent that has three possible events:
 - GetBlogPostsEvent
 - GetUserEvent
 - None
 
-For a big project we'd have a StateEvent for each ViewModel and a ViewState
+For a bigger project we'd have a StateEvent for each ViewModel and a ViewState
 for each
 
 ## dataState and viewState
