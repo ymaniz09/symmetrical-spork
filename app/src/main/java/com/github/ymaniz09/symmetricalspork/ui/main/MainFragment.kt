@@ -6,16 +6,29 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ymaniz09.symmetricalspork.R
+import com.github.ymaniz09.symmetricalspork.model.BlogPost
 import com.github.ymaniz09.symmetricalspork.ui.DataStateListener
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent
+import com.github.ymaniz09.symmetricalspork.util.TopSpacingItemDecoration
+import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), BlogPostAdapter.Interaction {
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var dataStateHandler: DataStateListener
+    private lateinit var blogPostAdapter: BlogPostAdapter
 
+    private fun initRecyclerView() {
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(TopSpacingItemDecoration(30))
+            blogPostAdapter = BlogPostAdapter(this@MainFragment)
+            adapter = blogPostAdapter
+        }
+    }
     private fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
 
@@ -40,7 +53,7 @@ class MainFragment : Fragment() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.blogPosts?.let { blogPosts ->
                 // set blog post to recyclerview
-                println("Posts received: $blogPosts")
+                blogPostAdapter.submitList(blogPosts)
             }
 
             viewState.user?.let {
@@ -73,6 +86,7 @@ class MainFragment : Fragment() {
         setHasOptionsMenu(true)
 
         subscribeObservers()
+        initRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -99,5 +113,10 @@ class MainFragment : Fragment() {
 
     companion object {
         const val TAG = "MainFragment"
+    }
+
+    override fun onItemSelected(position: Int, item: BlogPost) {
+        Log.d(TAG, "Item clicked at $position")
+        Log.d(TAG, "Blog item $item")
     }
 }
