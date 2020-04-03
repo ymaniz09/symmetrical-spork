@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/actionGetBlogs"
-        android:title="@string/menu_get_blogs"
+        android:title="@string/menu_get_blog_posts"
         app:showAsAction="never" />
 
 </menu>
