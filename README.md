@@ -4,9 +4,7 @@ and will implement an Android project using MVI.
 We'll build an event driven architecture leveraging the MVVM architecture.
 
 ## Motivation
-This architecture pays off when you share the same ViewModel between
-multiple fragments for instance. It'd be a nightmare keeping multiple  
-LiveData for each view.
+This architecture pays off when you share the same ViewModel between multiple fragments for instance. It'd be a nightmare keeping multiple LiveData for each view.
 
 ##  The app uses the following libraries / topics:
 - Kotlin
@@ -27,13 +25,9 @@ Those two will be handled by MainStateEvent that has three possible events:
 - GetUserEvent
 - None
 
-For a bigger project we'd have a StateEvent for each ViewModel and a ViewState
-for each
+For a bigger project we'd have a StateEvent for each ViewModel and a ViewState for each
 
 ## dataState and viewState
-When you fire off and event like get user event, this event will be
-handled by the method setStateEvent inside MainViewMode.
-The switchMap from dataState will trigger fetching the data in the
-repository. The response of this event will be  returned as a LiveData
-thru the viewState in the ViewModel.
+When you fire off and event like get user event, this event will be handled by the method setStateEvent inside MainViewMode.
+The switchMap from dataState will trigger fetching the data in the repository. The response of this event will be  returned as a LiveData thru the viewState in the ViewModel.
 The fragment observing it will handle the answer and show it properly.
