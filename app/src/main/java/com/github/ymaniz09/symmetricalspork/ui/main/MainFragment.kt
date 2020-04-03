@@ -22,14 +22,17 @@ class MainFragment : Fragment() {
             // Handling loading and message
             dataStateHandler.onDataStateChange(dataState)
 
-            // Handle Data<T>
-            dataState.data?.let { mainViewState ->
-                mainViewState.blogPosts?.let {
-                    viewModel.setBlogListData(it)
-                }
+            // Handle Data<T> if it wasn't consumed
+            dataState.data?.let { event ->
 
-                mainViewState.user?.let {
-                    viewModel.setUser(it)
+                event.getContentIfNotHandled()?.let { mainViewState ->
+                    mainViewState.blogPosts?.let {
+                        viewModel.setBlogListData(it)
+                    }
+
+                    mainViewState.user?.let {
+                        viewModel.setUser(it)
+                    }
                 }
             }
         })
