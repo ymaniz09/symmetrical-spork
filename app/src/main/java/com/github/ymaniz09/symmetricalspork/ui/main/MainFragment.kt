@@ -26,10 +26,12 @@ class MainFragment : Fragment() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.blogPosts?.let {blogPosts ->
                 // set blog post to recyclerview
+                println("Posts received: $blogPosts")
             }
 
             viewState.user?.let {
                 // set user data to view
+                println("User received: $it")
             }
         })
     }

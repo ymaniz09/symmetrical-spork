@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.github.ymaniz09.symmetricalspork.model.BlogPost
 import com.github.ymaniz09.symmetricalspork.model.User
+import com.github.ymaniz09.symmetricalspork.repository.Repository
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent.*
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainViewState
@@ -27,10 +28,10 @@ class MainViewModel : ViewModel() {
     private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<MainViewState> {
         return when (stateEvent) {
             is GetBlogPostsEvent ->
-                AbsentLiveData.create()
+                Repository.getBlogPosts()
 
             is GetUserEvent ->
-                AbsentLiveData.create()
+                Repository.getUser(stateEvent.userId)
 
             is None ->
                 AbsentLiveData.create()
