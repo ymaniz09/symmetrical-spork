@@ -7,12 +7,15 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.github.ymaniz09.symmetricalspork.R
 import com.github.ymaniz09.symmetricalspork.model.BlogPost
+import com.github.ymaniz09.symmetricalspork.model.User
 import com.github.ymaniz09.symmetricalspork.ui.DataStateListener
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent
 import com.github.ymaniz09.symmetricalspork.util.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.layout_blog_list_item.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(), BlogPostAdapter.Interaction {
@@ -57,10 +60,20 @@ class MainFragment : Fragment(), BlogPostAdapter.Interaction {
             }
 
             viewState.user?.let {
-                // set user data to view
-                println("User received: $it")
+                setUser(it)
             }
         })
+    }
+
+    private fun setUser(user: User) {
+        email.text = user.email
+        username.text = user.username
+
+        view?.let {
+            Glide.with(it)
+                .load(user.image)
+                .into(image)
+        }
     }
 
     override fun onAttach(context: Context) {
