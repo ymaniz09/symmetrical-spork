@@ -49,7 +49,7 @@ class MainViewModel : ViewModel() {
         _viewState.value = update
     }
 
-    fun getCurrentViewStateOrNew(): MainViewState {
+    private fun getCurrentViewStateOrNew(): MainViewState {
         return viewState.value?.let {
             it
         }?: MainViewState()
