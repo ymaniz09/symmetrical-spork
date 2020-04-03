@@ -11,21 +11,23 @@ import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainStateEvent.*
 import com.github.ymaniz09.symmetricalspork.ui.main.state.MainViewState
 import com.github.ymaniz09.symmetricalspork.util.AbsentLiveData
+import com.github.ymaniz09.symmetricalspork.util.DataState
 
 class MainViewModel : ViewModel() {
     private val _stateEvent: MutableLiveData<MainStateEvent> = MutableLiveData()
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
+
     val viewState: LiveData<MainViewState>
         get() = _viewState
 
-    val dataState: LiveData<MainViewState> = Transformations
+    val dataState: LiveData<DataState<MainViewState>> = Transformations
         .switchMap(_stateEvent) { stateEvent ->
             stateEvent?.let {
                 handleStateEvent(stateEvent)
             }
         }
 
-    private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<MainViewState> {
+    private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<DataState<MainViewState>> {
         return when (stateEvent) {
             is GetBlogPostsEvent ->
                 Repository.getBlogPosts()
